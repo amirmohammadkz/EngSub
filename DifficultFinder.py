@@ -107,6 +107,7 @@ def write_dif(output, output_dir):
 
 
 if __name__ == "__main__":
+    nltk.download("punkt")
     root_dir = "dataset/"
     dic_dir = "en_50k_2.txt"
     output_dir = "output.txt"
