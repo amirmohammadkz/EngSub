@@ -1,8 +1,10 @@
 import os
 import re
+import sys
 
 import nltk
 from nltk.corpus import stopwords
+from PyDictionary import PyDictionary
 
 
 def open_all_files(root_dir):
@@ -89,17 +91,34 @@ def filter_difficults(word_difficulty, dic_size, hardship):
 
 
 def write_dif(output, output_dir):
+    pydic = PyDictionary()
     t = open(output_dir, "w")
     for (word, hardship) in output:
         t.write(word + "\t" + str(hardship) + "\n")
+        t.write("Meaning: https://dictionary.cambridge.org/dictionary/english/" + word + "\n ")
+        pydic_res = pydic.meaning(word)
+        if pydic_res:
+            for pos in pydic_res.keys():
+                t.write("\t" + pos + "\n")
+                for meaning in pydic_res[pos]:
+                    t.write("\t\t" + meaning + "\n")
+        t.write("#######################\n")
     t.close()
 
 
 if __name__ == "__main__":
-    root_dir = "dataset/"
+    root_dir = "datasetw/"
     dic_dir = "en_50k_2.txt"
     output_dir = "output.txt"
-    hardship = 2
+    hardship = 5
+    try:
+        root_dir = sys.argv[1]
+        dic_dir = sys.argv[2]
+        output_dir = sys.argv[3]
+        hardship = int(sys.argv[4])
+    except:
+        pass
+
     files = open_all_files(root_dir)
     filtered_texts = filter_texts(files)
     features = extract_features(filtered_texts)
