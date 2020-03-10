@@ -107,10 +107,10 @@ def write_dif(output, output_dir):
 
 
 if __name__ == "__main__":
-    root_dir = "datasetw/"
+    root_dir = "dataset/"
     dic_dir = "en_50k_2.txt"
     output_dir = "output.txt"
-    hardship = 5
+    hardship = 1
     try:
         root_dir = sys.argv[1]
         dic_dir = sys.argv[2]
