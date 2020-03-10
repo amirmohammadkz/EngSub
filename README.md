@@ -28,3 +28,7 @@ python DifficultFinder.py dataset/ en_50k_2.txt output.txt 7
  For example, this is a small chunk of the `output.txt` file:
  
 ![an example of expected output](https://raw.githubusercontent.com/amirmohammadkz/EngSub/master/assets/output.jpg)
+
+
+
+The most used words in movies of 2018 file (`en_50k_2.txt`) is obtained from [this](https://github.com/hermitdave/FrequencyWords) repository
