@@ -8,8 +8,9 @@ Wanna learn English but you are struggling with difficult words that you don't u
 
 Example:
 
-`sh
-python DifficultFinder.py dataset/ en_50k_2.txt output.txt 7`
+```sh
+python DifficultFinder.py dataset/ en_50k_2.txt output.txt 7
+```
  
  Your output should be with this format:
  
