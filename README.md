@@ -1,4 +1,6 @@
 # EngSub
+ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+ 
 Find and learn The difficult English words in your subtitles!
 
 Wanna watch English movies but you are struggling with difficult words that you don't understand? Use EngSub to learn required words before watching a movie! There are just 3 steps:
