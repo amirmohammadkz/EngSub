@@ -17,18 +17,33 @@ def open_all_files(root_dir):
     return files_text
 
 
-def filter_texts(files):
+def filter_texts(files, method=2):
+    is_text = False
+    counter = 1
+    mini_counter = 0
     texts = []
     for line in files:
-        if re.match("<font.*>.*", line) or re.match(".*</font.*>", line):
-            # print("######################")
-            x = re.sub("(<font.*>)(.*)(</font.*>)", r"\2", line)
-            x = re.sub("(<font.*>)(.*)", r"\2", x)
-            x = re.sub("(.*)(</font.*>)", r"\1", x)
-            texts.append(x)
-            # print(x)
-            # print(line)
-            # print("######################")
+        if method == 1:
+            if re.match("<font.*>.*", line) or re.match(".*</font.*>", line):
+                # print("######################")
+                x = re.sub("(<font.*>)(.*)(</font.*>)", r"\2", line)
+                x = re.sub("(<font.*>)(.*)", r"\2", x)
+                x = re.sub("(.*)(</font.*>)", r"\1", x)
+                texts.append(x)
+        if method == 2:
+            if re.match(".*:.*:.*,.* --> .*:.*:.*,.*", line):
+                is_text = True
+                continue
+            elif line == "\n":
+                is_text = False
+                continue
+            elif is_text:
+                texts.append(line)
+                print(line)
+
+    # print(x)
+    # print(line)
+    # print("######################")
 
     return texts
 
@@ -93,7 +108,8 @@ def filter_difficults(word_difficulty, dic_size, hardship):
 def write_dif(output, output_dir):
     pydic = PyDictionary()
     t = open(output_dir, "w")
-    for (word, hardship) in output:
+    for idx, (word, hardship) in enumerate(output):
+        print(idx + 1, "of", len(output))
         t.write(word + "\t" + str(hardship) + "\n")
         t.write("Meaning: https://dictionary.cambridge.org/dictionary/english/" + word + "\n ")
         pydic_res = pydic.meaning(word)
@@ -111,7 +127,7 @@ if __name__ == "__main__":
     root_dir = "dataset/"
     dic_dir = "en_50k_2.txt"
     output_dir = "output.txt"
-    hardship = 1
+    hardship = 2
     try:
         root_dir = sys.argv[1]
         dic_dir = sys.argv[2]
